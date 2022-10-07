@@ -17,6 +17,7 @@ let bMultiplicar = document.querySelector(".multiplicar")
 
 let reset= document.querySelector(".reset")
 let bResultado= document.querySelector(".resultado")
+let clear = document.querySelector(".clear")
 
 let operador = document.querySelector(".operador")
 let primerOperador = document.querySelector(".num1")
@@ -110,6 +111,19 @@ nueve.addEventListener("click", ()=>{
 })
 cero.addEventListener("click", ()=>{
     comprobacion(cero.textContent)
+})
+
+clear.addEventListener("click", ()=>{
+    if (answer == undefined){
+        if (numOneAdd == true){
+            primerOperador.textContent = ""
+            numeros1 = ""
+        }
+        else if (numTwoAdd == true){
+            segundoOperador.textContent = ""
+            numeros2 = ""
+        }
+    }
 })
 
 mas.addEventListener("click", ()=>{
