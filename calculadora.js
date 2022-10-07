@@ -11,7 +11,7 @@ let cero = document.querySelector(".cero")
 let teclado = document.querySelector(".teclado")
 
 let mas = document.querySelector(".mas")
-let menos = document.querySelector(".meno")
+let menos = document.querySelector(".menos")
 let bDividir = document.querySelector(".dividir")
 let bMultiplicar = document.querySelector(".multiplicar")
 
@@ -52,6 +52,17 @@ let suma = (numero1,numero2) =>{
     }
     else if (answer !== undefined) {
         answer = parseInt(answer)+parseInt(numero2)
+        //console.log(answer)
+    }
+}
+
+let resta = (numero1,numero2) => {
+    if (answer == undefined) {
+        answer = parseInt(numero1)-parseInt(numero2)
+        //console.log(answer)
+    }
+    else if (answer !== undefined) {
+        answer = parseInt(answer)-parseInt(numero2)
         //console.log(answer)
     }
 }
@@ -107,29 +118,66 @@ mas.addEventListener("click", ()=>{
 
 })
 
+menos.addEventListener("click", ()=>{
+    if (answer == undefined){
+        numOneAdd = false
+        numTwoAdd = true
+        operador.textContent = "-"
+        operador.style.display = "inline"
+        segundoOperador.style.display = "inline"
+    }
+    else if (answer !== undefined) {
+        numeros2 = ""
+        numTwoAdd = true
+        segundoOperador.style.display = "inline"
+        operador.textContent = "-"
+        operador.style.display = "inline"
+        segundoOperador.textContent = ""
+    }
+})
+
 reset.addEventListener("click", ()=>{
     history.go()
 })
 
 bResultado.addEventListener("click", ()=>{
-    if (answer == undefined){
-        suma(numeros1,numeros2)
-      //  console.log(numeros1, " ", numeros2)
-        primerOperador.style.display = "none"
-        operador.style.display = "none"
-        segundoOperador.style.display = "none"
-        resultadoPantalla.style.display ="inline"
-        resultadoPantalla.textContent = answer
+    if(operador.textContent == "+"){
+        if (answer == undefined){
+            suma(numeros1,numeros2)
+          //  console.log(numeros1, " ", numeros2)
+            primerOperador.style.display = "none"
+            operador.style.display = "none"
+            segundoOperador.style.display = "none"
+            resultadoPantalla.style.display ="inline"
+            resultadoPantalla.textContent = answer
+        }
+        else if (answer !== undefined){
+            suma(answer,numeros2)
+           // console.log(numeros1, " ", numeros2)
+            operador.style.display = "none"
+            segundoOperador.style.display = "none"
+            resultadoPantalla.style.display ="inline"
+            resultadoPantalla.textContent = answer
+        }
     }
-    else if (answer !== undefined){
-        suma(answer,numeros2)
-       // console.log(numeros1, " ", numeros2)
-        operador.style.display = "none"
-        segundoOperador.style.display = "none"
-        resultadoPantalla.style.display ="inline"
-        resultadoPantalla.textContent = answer
+    if(operador.textContent == "-"){
+        if (answer == undefined){
+            resta(numeros1,numeros2)
+            primerOperador.style.display = "none"
+            operador.style.display = "none"
+            segundoOperador.style.display = "none"
+            resultadoPantalla.style.display ="inline"
+            resultadoPantalla.textContent = answer
+        }
+        else if (answer !== undefined){
+            resta(answer,numeros2)
+            operador.style.display = "none"
+            segundoOperador.style.display = "none"
+            resultadoPantalla.style.display ="inline"
+            resultadoPantalla.textContent = answer
+        }
+    }
 
-    }
 })
 
 
