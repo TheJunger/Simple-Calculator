@@ -72,6 +72,15 @@ let multiplicacion = (numero1,numero2) => {
     }
 }
 
+let division = (numero1,numero2) => {
+    if (answer == undefined) {
+        answer = parseInt(numero1)/parseInt(numero2)
+    }
+    else if (answer !== undefined) {
+        answer = parseInt(answer)/parseInt(numero2)
+    }    
+}
+
 uno.addEventListener("click", ()=>{
     comprobacion(uno.textContent)
 })
@@ -159,6 +168,24 @@ bMultiplicar.addEventListener("click", ()=>{
     }
 })
 
+bDividir.addEventListener("click", ()=>{
+    if (answer == undefined){
+        numOneAdd = false
+        numTwoAdd = true
+        operador.textContent = "/"
+        operador.style.display = "inline"
+        segundoOperador.style.display = "inline"
+    }
+    else if (answer !== undefined) {
+        numeros2 = ""
+        numTwoAdd = true
+        segundoOperador.style.display = "inline"
+        operador.textContent = "/"
+        operador.style.display = "inline"
+        segundoOperador.textContent = ""
+    }
+})
+
 reset.addEventListener("click", ()=>{
     history.go()
 })
@@ -211,6 +238,23 @@ bResultado.addEventListener("click", ()=>{
         }
         else if (answer !== undefined){
             multiplicacion(answer,numeros2)
+            operador.style.display = "none"
+            segundoOperador.style.display = "none"
+            resultadoPantalla.style.display ="inline"
+            resultadoPantalla.textContent = answer
+        }
+    }
+    if(operador.textContent == "/"){
+        if (answer == undefined){
+            division(numeros1,numeros2)
+            primerOperador.style.display = "none"
+            operador.style.display = "none"
+            segundoOperador.style.display = "none"
+            resultadoPantalla.style.display ="inline"
+            resultadoPantalla.textContent = answer
+        }
+        else if (answer !== undefined){
+            division(answer,numeros2)
             operador.style.display = "none"
             segundoOperador.style.display = "none"
             resultadoPantalla.style.display ="inline"
