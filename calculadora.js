@@ -48,22 +48,27 @@ numTwoAdd = false
 let suma = (numero1,numero2) =>{
     if (answer == undefined) {
         answer = parseInt(numero1)+parseInt(numero2)
-        //console.log(answer)
     }
     else if (answer !== undefined) {
         answer = parseInt(answer)+parseInt(numero2)
-        //console.log(answer)
     }
 }
 
 let resta = (numero1,numero2) => {
     if (answer == undefined) {
         answer = parseInt(numero1)-parseInt(numero2)
-        //console.log(answer)
     }
     else if (answer !== undefined) {
         answer = parseInt(answer)-parseInt(numero2)
-        //console.log(answer)
+    }
+}
+
+let multiplicacion = (numero1,numero2) => {
+    if (answer == undefined) {
+        answer = parseInt(numero1)*parseInt(numero2)
+    }
+    else if (answer !== undefined) {
+        answer = parseInt(answer)*parseInt(numero2)
     }
 }
 
@@ -136,6 +141,24 @@ menos.addEventListener("click", ()=>{
     }
 })
 
+bMultiplicar.addEventListener("click", ()=>{
+    if (answer == undefined){
+        numOneAdd = false
+        numTwoAdd = true
+        operador.textContent = "x"
+        operador.style.display = "inline"
+        segundoOperador.style.display = "inline"
+    }
+    else if (answer !== undefined) {
+        numeros2 = ""
+        numTwoAdd = true
+        segundoOperador.style.display = "inline"
+        operador.textContent = "x"
+        operador.style.display = "inline"
+        segundoOperador.textContent = ""
+    }
+})
+
 reset.addEventListener("click", ()=>{
     history.go()
 })
@@ -176,8 +199,24 @@ bResultado.addEventListener("click", ()=>{
             resultadoPantalla.style.display ="inline"
             resultadoPantalla.textContent = answer
         }
+    }  
+    if(operador.textContent == "x"){
+        if (answer == undefined){
+            multiplicacion(numeros1,numeros2)
+            primerOperador.style.display = "none"
+            operador.style.display = "none"
+            segundoOperador.style.display = "none"
+            resultadoPantalla.style.display ="inline"
+            resultadoPantalla.textContent = answer
+        }
+        else if (answer !== undefined){
+            multiplicacion(answer,numeros2)
+            operador.style.display = "none"
+            segundoOperador.style.display = "none"
+            resultadoPantalla.style.display ="inline"
+            resultadoPantalla.textContent = answer
+        }
     }
-
 })
 
 
