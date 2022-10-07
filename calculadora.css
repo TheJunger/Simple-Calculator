@@ -1,0 +1,93 @@
+body{
+    color: #222;
+    font-family: sans-serif;
+    background-color: #eee;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #222;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.container div{
+    border: 1px solid #222;
+}
+
+.pantalla {
+    padding: 10px 5px;
+    border: 1px solid #222;
+    display: flex;
+    flex-direction: row-reverse;
+    max-width: 260px;
+    overflow: hidden;
+}
+
+.pantalla p{
+    margin: 0;
+    padding: 30px;
+    border: 1px solid #222;
+    text-align: right;
+}
+
+.teclado {
+    padding: 30px 15px;
+    display: grid;
+    grid-gap: 7px;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    padding-top: 18px;
+
+}
+
+.teclado div {
+    padding: 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.teclado div:active {
+    transform: scale(0.9);
+}
+
+.num2 {
+    display: none;
+}
+
+.operador {
+    display: none;
+}
+
+.resultadoP {
+    display: none;
+}
+
+.reset {
+    padding: 0px 13px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.reset p {
+    border: 1px solid #222;
+    margin: 0;
+    padding: 0;
+    padding: 2px 5px;
+}
+
+
+
+
+
+
+
+
+
