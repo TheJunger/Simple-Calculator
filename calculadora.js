@@ -104,7 +104,7 @@ siete.addEventListener("click", ()=>{
     comprobacion(siete.textContent)
 })
 ocho.addEventListener("click", ()=>{
-    comprobacion(pcho.textContent)
+    comprobacion(ocho.textContent)
 })
 nueve.addEventListener("click", ()=>{
     comprobacion(nueve.textContent)
@@ -116,21 +116,21 @@ cero.addEventListener("click", ()=>{
 clear.addEventListener("click", ()=>{
     if (answer == undefined){
         if (numOneAdd == true){
-            primerOperador.textContent = ""
+            primerOperador.textContent = "0"
             numeros1 = ""
         }
-        else if (numTwoAdd == true){
-            segundoOperador.textContent = ""
-            numeros2 = ""
-        }
+    }
+    else if (numTwoAdd == true){
+        segundoOperador.textContent = "0"
+        numeros2 = ""
     }
 })
 
-mas.addEventListener("click", ()=>{
+const setOperador = operadorTo =>{
     if (answer == undefined){
         numOneAdd = false
         numTwoAdd = true
-        operador.textContent = "+"
+        operador.textContent = operadorTo
         operador.style.display = "inline"
         segundoOperador.style.display = "inline"
     }
@@ -139,141 +139,82 @@ mas.addEventListener("click", ()=>{
         console.log(numeros2)
         numTwoAdd = true
         segundoOperador.style.display = "inline"
-        operador.textContent = "+"
+        operador.textContent = operadorTo
         operador.style.display = "inline"
         segundoOperador.textContent = ""
+        if(primerOperador.textContent.length > 8){
+            segundoOperador.style.fontSize = "25px"
+            operador.style.fontSize = "25px"
+        }
+        else if (primerOperador.textContent.length < 8){
+            segundoOperador.style.fontSize = "60px"
+            operador.style.fontSize = "60px"
+        }
     }
+}
 
+mas.addEventListener("click", ()=>{
+    setOperador("+")
 })
 
 menos.addEventListener("click", ()=>{
-    if (answer == undefined){
-        numOneAdd = false
-        numTwoAdd = true
-        operador.textContent = "-"
-        operador.style.display = "inline"
-        segundoOperador.style.display = "inline"
-    }
-    else if (answer !== undefined) {
-        numeros2 = ""
-        numTwoAdd = true
-        segundoOperador.style.display = "inline"
-        operador.textContent = "-"
-        operador.style.display = "inline"
-        segundoOperador.textContent = ""
-    }
+    setOperador("-")
 })
 
 bMultiplicar.addEventListener("click", ()=>{
-    if (answer == undefined){
-        numOneAdd = false
-        numTwoAdd = true
-        operador.textContent = "x"
-        operador.style.display = "inline"
-        segundoOperador.style.display = "inline"
-    }
-    else if (answer !== undefined) {
-        numeros2 = ""
-        numTwoAdd = true
-        segundoOperador.style.display = "inline"
-        operador.textContent = "x"
-        operador.style.display = "inline"
-        segundoOperador.textContent = ""
-    }
+    setOperador("x")
 })
 
 bDividir.addEventListener("click", ()=>{
-    if (answer == undefined){
-        numOneAdd = false
-        numTwoAdd = true
-        operador.textContent = "/"
-        operador.style.display = "inline"
-        segundoOperador.style.display = "inline"
-    }
-    else if (answer !== undefined) {
-        numeros2 = ""
-        numTwoAdd = true
-        segundoOperador.style.display = "inline"
-        operador.textContent = "/"
-        operador.style.display = "inline"
-        segundoOperador.textContent = ""
-    }
+    setOperador("/")
 })
 
 reset.addEventListener("click", ()=>{
     history.go()
 })
 
+const operacion = operacion =>{
+    if (answer == undefined){
+        operacion(numeros1,numeros2)
+        primerOperador.style.display = "none"
+        operador.style.display = "none"
+        segundoOperador.style.display = "none"
+        resultadoPantalla.style.display ="inline"
+        resultadoPantalla.textContent = answer
+        if(resultadoPantalla.textContent.length > 8){
+            resultadoPantalla.style.fontSize = "25px"
+        }
+        else if(resultadoPantalla.textContent.length < 8){
+            resultadoPantalla.style.fontSize = "60px"
+        }
+    }
+    else if (answer !== undefined){
+        operacion(answer,numeros2)
+        operador.style.display = "none"
+        segundoOperador.style.display = "none"
+        resultadoPantalla.style.display ="inline"
+        resultadoPantalla.textContent = answer
+        if(resultadoPantalla.textContent.length > 8){
+            resultadoPantalla.style.fontSize = "25px"
+        }
+        if(resultadoPantalla.textContent.length < 8){
+            resultadoPantalla.style.fontSize = "60px"
+        }
+    }
+}
+
 bResultado.addEventListener("click", ()=>{
     if(operador.textContent == "+"){
-        if (answer == undefined){
-            suma(numeros1,numeros2)
-          //  console.log(numeros1, " ", numeros2)
-            primerOperador.style.display = "none"
-            operador.style.display = "none"
-            segundoOperador.style.display = "none"
-            resultadoPantalla.style.display ="inline"
-            resultadoPantalla.textContent = answer
-        }
-        else if (answer !== undefined){
-            suma(answer,numeros2)
-           // console.log(numeros1, " ", numeros2)
-            operador.style.display = "none"
-            segundoOperador.style.display = "none"
-            resultadoPantalla.style.display ="inline"
-            resultadoPantalla.textContent = answer
-        }
+        operacion(suma)
     }
     if(operador.textContent == "-"){
-        if (answer == undefined){
-            resta(numeros1,numeros2)
-            primerOperador.style.display = "none"
-            operador.style.display = "none"
-            segundoOperador.style.display = "none"
-            resultadoPantalla.style.display ="inline"
-            resultadoPantalla.textContent = answer
-        }
-        else if (answer !== undefined){
-            resta(answer,numeros2)
-            operador.style.display = "none"
-            segundoOperador.style.display = "none"
-            resultadoPantalla.style.display ="inline"
-            resultadoPantalla.textContent = answer
-        }
+        operacion(resta)
     }  
     if(operador.textContent == "x"){
-        if (answer == undefined){
-            multiplicacion(numeros1,numeros2)
-            primerOperador.style.display = "none"
-            operador.style.display = "none"
-            segundoOperador.style.display = "none"
-            resultadoPantalla.style.display ="inline"
-            resultadoPantalla.textContent = answer
-        }
-        else if (answer !== undefined){
-            multiplicacion(answer,numeros2)
-            operador.style.display = "none"
-            segundoOperador.style.display = "none"
-            resultadoPantalla.style.display ="inline"
-            resultadoPantalla.textContent = answer
-        }
+        operacion(multiplicacion)
     }
     if(operador.textContent == "/"){
-        if (answer == undefined){
-            division(numeros1,numeros2)
-            primerOperador.style.display = "none"
-            operador.style.display = "none"
-            segundoOperador.style.display = "none"
-            resultadoPantalla.style.display ="inline"
-            resultadoPantalla.textContent = answer
-        }
-        else if (answer !== undefined){
-            division(answer,numeros2)
-            operador.style.display = "none"
-            segundoOperador.style.display = "none"
-            resultadoPantalla.style.display ="inline"
-            resultadoPantalla.textContent = answer
-        }
+        operacion(division)
     }
 })
 
