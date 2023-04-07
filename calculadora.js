@@ -24,13 +24,14 @@ let primerOperador = document.querySelector(".num1")
 let segundoOperador = document.querySelector(".num2")
 let resultadoPantalla = document.querySelector(".resultadoP")
 
-numeros1 = ""
-numeros2 = ""
-nuevoNumero = ""
-answer = undefined
+let operadores = 0
+let numeros1 = ""
+let numeros2 = ""
+let nuevoNumero = ""
+let answer = undefined
 
-numOneAdd = true
-numTwoAdd = false
+let numOneAdd = true
+let numTwoAdd = false
 
  let comprobacion = numero =>{
     if (numOneAdd==true) {
@@ -119,10 +120,17 @@ clear.addEventListener("click", ()=>{
             primerOperador.textContent = "0"
             numeros1 = ""
         }
+        else if (numTwoAdd == true){
+            segundoOperador.textContent = "0"
+            numeros2 = ""
+        }
     }
-    else if (numTwoAdd == true){
-        segundoOperador.textContent = "0"
-        numeros2 = ""
+    else{
+        if (operador.textContent.length > 0) {
+            operador.textContent = ""
+            segundoOperador.style.display = "none"
+        }
+        resultadoPantalla.textContent = '0'
     }
 })
 
@@ -154,19 +162,39 @@ const setOperador = operadorTo =>{
 }
 
 mas.addEventListener("click", ()=>{
-    setOperador("+")
+    if (operadores < 1) {
+        operadores++
+        setOperador("+")
+    } else {
+        alert("No puedes utilizar más de 2 operadores")
+    }
 })
 
 menos.addEventListener("click", ()=>{
-    setOperador("-")
+    if (operadores < 1) {
+        operadores++
+        setOperador("-")
+    } else {
+        alert("No puedes utilizar más de 2 operadores")
+    }
 })
 
 bMultiplicar.addEventListener("click", ()=>{
-    setOperador("x")
+    if (operadores < 1) {
+        operadores++
+        setOperador("x")
+    } else {
+        alert("No puedes utilizar más de 2 operadores")
+    }
 })
 
 bDividir.addEventListener("click", ()=>{
-    setOperador("/")
+    if (operadores < 1) {
+        operadores++
+        setOperador("/")
+    } else {
+        alert("No puedes utilizar más de 2 operadores")
+    }
 })
 
 reset.addEventListener("click", ()=>{
@@ -205,33 +233,19 @@ const operacion = operacion =>{
 
 bResultado.addEventListener("click", ()=>{
     if(operador.textContent == "+"){
+        operadores=0
         operacion(suma)
     }
     if(operador.textContent == "-"){
+        operadores=0
         operacion(resta)
     }  
     if(operador.textContent == "x"){
+        operadores=0
         operacion(multiplicacion)
     }
     if(operador.textContent == "/"){
+        operadores=0
         operacion(division)
     }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
